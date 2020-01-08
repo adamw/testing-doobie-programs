@@ -27,9 +27,11 @@ object Example1 {
 
   object DefaultDao extends Dao {
     override def currentPoints(userId: UUID): doobie.ConnectionIO[Int] =
-      sql"SELECT points FROM user_points WHERE user_id = $userId".query[Int].unique
+      sql"SELECT points FROM user_points WHERE user_id = $userId"
+        .query[Int].unique
 
     override def updatePoints(userId: UUID, value: Int): doobie.ConnectionIO[Unit] =
-      sql"UPDATE user_points SET points = $value WHERE user_id = $userId".update.run.map(_ => ())
+      sql"UPDATE user_points SET points = $value WHERE user_id = $userId"
+        .update.run.map(_ => ())
   }
 }
